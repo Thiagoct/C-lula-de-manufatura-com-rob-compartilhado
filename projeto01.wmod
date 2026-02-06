@@ -2,12 +2,12 @@
 <Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="projeto01">
 <EventDeclList>
 <EventDecl Kind="PROPOSITION" Name=":accepting"/>
-<EventDecl Kind="CONTROLLABLE" Name="m1_start"/>
-<EventDecl Kind="UNCONTROLLABLE" Name="m1_end"/>
-<EventDecl Kind="CONTROLLABLE" Name="m1_pick"/>
-<EventDecl Kind="CONTROLLABLE" Name="m2_start"/>
-<EventDecl Kind="UNCONTROLLABLE" Name="m2_end"/>
-<EventDecl Kind="CONTROLLABLE" Name="m2_pick"/>
+<EventDecl Kind="CONTROLLABLE" Name="start_M1"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_M1"/>
+<EventDecl Kind="CONTROLLABLE" Name="get_M1"/>
+<EventDecl Kind="CONTROLLABLE" Name="start_M2"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_M2"/>
+<EventDecl Kind="CONTROLLABLE" Name="get_M2"/>
 <EventDecl Kind="CONTROLLABLE" Name="buffer_drop"/>
 <EventDecl Kind="CONTROLLABLE" Name="buffer_remove"/>
 </EventDeclList>
@@ -15,25 +15,25 @@
 <SimpleComponent Kind="PLANT" Name="M1">
 <Graph>
 <NodeList>
-<SimpleNode Initial="true" Name="m1_idle">
+<SimpleNode Initial="true" Name="M1_IDLE">
 <PointGeometry>
-<Point X="80" Y="128"/>
+<Point X="128" Y="96"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="-41" Y="20"/>
+<Point X="-66" Y="-4"/>
 </LabelGeometry>
 </SimpleNode>
-<SimpleNode Name="m1_processing">
+<SimpleNode Name="M1_PROCESSING">
 <PointGeometry>
-<Point X="160" Y="48"/>
+<Point X="208" Y="144"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="-37" Y="-30"/>
+<Point X="21" Y="-4"/>
 </LabelGeometry>
 </SimpleNode>
-<SimpleNode Name="m1_finished">
+<SimpleNode Name="M1_FINISHED">
 <PointGeometry>
-<Point X="224" Y="128"/>
+<Point X="176" Y="240"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
 <Point X="0" Y="10"/>
@@ -41,19 +41,28 @@
 </SimpleNode>
 </NodeList>
 <EdgeList>
-<Edge Source="m1_idle" Target="m1_processing">
+<Edge Source="M1_IDLE" Target="M1_PROCESSING">
 <LabelBlock>
-<SimpleIdentifier Name="m1_start"/>
+<SimpleIdentifier Name="start_M1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-3" Y="-24"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
-<Edge Source="m1_processing" Target="m1_finished">
+<Edge Source="M1_PROCESSING" Target="M1_FINISHED">
 <LabelBlock>
-<SimpleIdentifier Name="m1_end"/>
+<SimpleIdentifier Name="end_M1"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="2"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
-<Edge Source="m1_finished" Target="m1_idle">
+<Edge Source="M1_FINISHED" Target="M1_IDLE">
 <LabelBlock>
-<SimpleIdentifier Name="m1_pick"/>
+<SimpleIdentifier Name="get_M1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-55" Y="8"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 </EdgeList>
@@ -62,25 +71,25 @@
 <SimpleComponent Kind="PLANT" Name="M2">
 <Graph>
 <NodeList>
-<SimpleNode Initial="true" Name="m2_idle">
+<SimpleNode Initial="true" Name="M2_IDLE">
 <PointGeometry>
-<Point X="304" Y="288"/>
+<Point X="304" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-58" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="M2_PROCESSING">
+<PointGeometry>
+<Point X="432" Y="224"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
 <Point X="0" Y="10"/>
 </LabelGeometry>
 </SimpleNode>
-<SimpleNode Name="m2_processing">
+<SimpleNode Name="M2_FINISHED">
 <PointGeometry>
-<Point X="432" Y="160"/>
-</PointGeometry>
-<LabelGeometry Anchor="NW">
-<Point X="0" Y="10"/>
-</LabelGeometry>
-</SimpleNode>
-<SimpleNode Name="m2_finished">
-<PointGeometry>
-<Point X="512" Y="304"/>
+<Point X="336" Y="368"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
 <Point X="0" Y="10"/>
@@ -88,19 +97,25 @@
 </SimpleNode>
 </NodeList>
 <EdgeList>
-<Edge Source="m2_idle" Target="m2_processing">
+<Edge Source="M2_IDLE" Target="M2_PROCESSING">
 <LabelBlock>
-<SimpleIdentifier Name="m2_start"/>
+<SimpleIdentifier Name="start_M2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-12" Y="-25"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
-<Edge Source="m2_processing" Target="m2_finished">
+<Edge Source="M2_PROCESSING" Target="M2_FINISHED">
 <LabelBlock>
-<SimpleIdentifier Name="m2_end"/>
+<SimpleIdentifier Name="end_M2"/>
 </LabelBlock>
 </Edge>
-<Edge Source="m2_finished" Target="m2_idle">
+<Edge Source="M2_FINISHED" Target="M2_IDLE">
 <LabelBlock>
-<SimpleIdentifier Name="m2_pick"/>
+<SimpleIdentifier Name="get_M2"/>
+<LabelGeometry Anchor="NW">
+<Point X="-52" Y="10"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 </EdgeList>
@@ -109,33 +124,36 @@
 <SimpleComponent Kind="PLANT" Name="BUFFER_OUT">
 <Graph>
 <NodeList>
-<SimpleNode Initial="true" Name="B_0">
+<SimpleNode Initial="true" Name="BUFFER_EMPTY">
 <PointGeometry>
 <Point X="208" Y="272"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="-27" Y="15"/>
+<Point X="-106" Y="2"/>
 </LabelGeometry>
 </SimpleNode>
-<SimpleNode Name="B_1">
+<SimpleNode Name="BUFFER_1">
 <PointGeometry>
 <Point X="384" Y="272"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="-11" Y="21"/>
+<Point X="-72" Y="-6"/>
 </LabelGeometry>
 </SimpleNode>
-<SimpleNode Name="B_full">
+<SimpleNode Name="BUFFER_FULL">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
 <PointGeometry>
 <Point X="528" Y="272"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="0" Y="10"/>
+<Point X="10" Y="-6"/>
 </LabelGeometry>
 </SimpleNode>
 </NodeList>
 <EdgeList>
-<Edge Source="B_0" Target="B_1">
+<Edge Source="BUFFER_EMPTY" Target="BUFFER_1">
 <LabelBlock>
 <SimpleIdentifier Name="buffer_drop"/>
 </LabelBlock>
@@ -143,7 +161,7 @@
 <Point X="301" Y="195"/>
 </SplineGeometry>
 </Edge>
-<Edge Source="B_1" Target="B_full">
+<Edge Source="BUFFER_1" Target="BUFFER_FULL">
 <LabelBlock>
 <SimpleIdentifier Name="buffer_drop"/>
 </LabelBlock>
@@ -151,7 +169,7 @@
 <Point X="457" Y="194"/>
 </SplineGeometry>
 </Edge>
-<Edge Source="B_full" Target="B_1">
+<Edge Source="BUFFER_FULL" Target="BUFFER_1">
 <LabelBlock>
 <SimpleIdentifier Name="buffer_remove"/>
 </LabelBlock>
@@ -159,7 +177,7 @@
 <Point X="459" Y="335"/>
 </SplineGeometry>
 </Edge>
-<Edge Source="B_1" Target="B_0">
+<Edge Source="BUFFER_1" Target="BUFFER_EMPTY">
 <LabelBlock>
 <SimpleIdentifier Name="buffer_remove"/>
 </LabelBlock>
@@ -178,7 +196,7 @@
 <Point X="496" Y="128"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="0" Y="10"/>
+<Point X="-59" Y="-4"/>
 </LabelGeometry>
 </SimpleNode>
 <SimpleNode Name="R_MOV_M1">
@@ -186,7 +204,7 @@
 <Point X="400" Y="208"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="0" Y="10"/>
+<Point X="-80" Y="-6"/>
 </LabelGeometry>
 </SimpleNode>
 <SimpleNode Name="R_MOV_M2">
@@ -202,34 +220,49 @@
 <Point X="496" Y="304"/>
 </PointGeometry>
 <LabelGeometry Anchor="NW">
-<Point X="0" Y="10"/>
+<Point X="-40" Y="12"/>
 </LabelGeometry>
 </SimpleNode>
 </NodeList>
 <EdgeList>
 <Edge Source="R_IDLE" Target="R_MOV_M1">
 <LabelBlock>
-<SimpleIdentifier Name="m1_end"/>
+<SimpleIdentifier Name="end_M1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-60" Y="-9"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 <Edge Source="R_IDLE" Target="R_MOV_M2">
 <LabelBlock>
-<SimpleIdentifier Name="m2_end"/>
+<SimpleIdentifier Name="end_M2"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="-14"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 <Edge Source="R_MOV_M1" Target="R_MOVE_BUFFER">
 <LabelBlock>
-<SimpleIdentifier Name="m1_pick"/>
+<SimpleIdentifier Name="get_M1"/>
+<LabelGeometry Anchor="NW">
+<Point X="-33" Y="13"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 <Edge Source="R_MOV_M2" Target="R_MOVE_BUFFER">
 <LabelBlock>
-<SimpleIdentifier Name="m2_pick"/>
+<SimpleIdentifier Name="get_M2"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="-1"/>
+</LabelGeometry>
 </LabelBlock>
 </Edge>
 <Edge Source="R_MOVE_BUFFER" Target="R_IDLE">
 <LabelBlock>
 <SimpleIdentifier Name="buffer_drop"/>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="-9"/>
+</LabelGeometry>
 </LabelBlock>
 <SplineGeometry>
 <Point X="806" Y="222"/>
