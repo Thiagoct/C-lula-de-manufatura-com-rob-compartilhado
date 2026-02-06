@@ -18,3 +18,5 @@ O Robô Industrial atua como o elemento central de transporte da célula, sendo 
 ### Armazenamento Intermediário
 Responsável por receber os produtos acabados, o Buffer possui uma restrição de capacidade fixa de dois slots. O componente opera sob lógica de rejeição quando cheio: se o número de peças armazenadas igualar a capacidade máxima, qualquer tentativa de depósito pelo robô é bloqueada para evitar transbordamento, gerando um possível gargalo no fluxo produtivo.
 ![Buffer de Saída](./imagens/PROJETO01_SED-BUFFER_OUT.png)
+
+Link para vídeo sobre o projeto: https://youtu.be/4KS1CGHicLI?si=iXPnqQ64d11o2oT7
