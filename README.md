@@ -10,7 +10,8 @@ O objetivo fundamental da planta é transformar matéria-prima em produtos acaba
 O sistema é composto por 4 subsistemas principais que interagem de forma síncrona:
 
 ### Máquinas 1 e 2
-
+![Máquinas 1 e 2](./imagens/PROJETO01_SED-M1&M2.png)
 ### Robô de Transporte
-
+![Robô de Transporte](./imagens/PROJETO01_SED-ROBOT.png)
 ### Armazenamento Intermediário
+![Buffer de Saída](./imagens/PROJETO01_SED-BUFFER_OUT.png)
